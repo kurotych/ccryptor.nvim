@@ -4,9 +4,10 @@ A Neovim **Linux** plugin to easy encrypt and decrypt your secured directory, ba
 
 ![output](https://user-images.githubusercontent.com/20345096/200641339-0b58cfcd-5152-4295-a72f-250c22af981b.gif)
 
-## WARNING
-This is very first verions. The plugin under testing with `ccrypt 1.11 version`  
-Be careful, **you can lose your data.**  
+## Disclaimer
+The plugin is tested with `ccrypt 1.11 version`  
+I used it already for several months as a password manager without major issues.  
+But still be careful, **you can lose your data** always make a backup.  
 
 ## How it works
 
