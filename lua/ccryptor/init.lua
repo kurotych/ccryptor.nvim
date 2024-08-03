@@ -118,7 +118,7 @@ decrypt_file = function(file_path, try_number)
     end
 
     local decrypted_text =
-    vim.api.nvim_exec(string.format("!ccrypt -cb -E ccrypt_pass %s", file_path), true)
+    vim.api.nvim_exec(string.format("!ccrypt -cb -E ccrypt_pass \"%s\"", file_path), true)
     decrypted_text = split(decrypted_text, "\n")
     table.remove(decrypted_text, 1)
     table.remove(decrypted_text, 1)
@@ -141,17 +141,17 @@ L.write_post_hook = function()
     local current_buf = vim.api.nvim_get_current_buf()
     local filename_path = vim.api.nvim_buf_get_name(current_buf)
     local buf_text_before_encrypt = vim.api.nvim_buf_get_lines(current_buf, 0, -1, false)
-    vim.api.nvim_exec(string.format("!ccrypt -e -E ccrypt_pass %s", filename_path), true)
+    vim.api.nvim_exec(string.format("!ccrypt -e -E ccrypt_pass \"%s\"", filename_path), true)
     local generated_file_path = filename_path .. ".cpt"
     if ends_with(generated_file_path, ".cpt.cpt") then
-        vim.api.nvim_exec(string.format("!mv %s %s", generated_file_path, filename_path), true)
+        vim.api.nvim_exec(string.format("!mv \"%s\" \"%s\"", generated_file_path, filename_path), true)
         vim.api.nvim_exec(string.format("e %s", filename_path), true)
     else
         -- This is first open of unencrypted file.
         -- After encryption we need to make sure that
         -- unencrypted file doesn't still exists
         vim.api.nvim_buf_delete(current_buf, { force = true })
-        vim.api.nvim_exec(string.format("!rm %s", filename_path), true)
+        vim.api.nvim_exec(string.format("!rm \"%s\"", filename_path), true)
 
         vim.api.nvim_exec(string.format("e %s", generated_file_path), true)
         current_buf = vim.api.nvim_get_current_buf()
